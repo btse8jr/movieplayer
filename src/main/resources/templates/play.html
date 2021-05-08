@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="transform: none;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=60">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/static/plugins/jquery/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/static/plugins/ckplayer/ckplayer/ckplayer.js}" charset="utf-8"></script>
+    <title th:text="${film.filmName}+'第'+${episode.episodeNumber}+'集'"></title>
+</head>
+<body class="fed-min-width" style="transform: none;">
+<div th:replace="nav::nav"></div>
+<script th:inline="javascript">
+    var context=/*[[@{/}]]*/'';
+    var ctx=context=="\/"?"":context;
+    $(function () {
+        play();
+        var items=$(".fed-navs-title");
+        $.each(items,function (index,item) {
+            if($(item).text()==[[${film.catlog.catlogName}]]){
+                $(item).addClass("fed-text-green");
+            }
+        });
+        prevAndNext();
+        $(".fed-play-reno").click(function () {
+            location.reload();
+        });
+    });
+    function play(){
+        var link=[[${episode.link}]].replace(/\//g,"_");
+        var vtype=link.substring(link.length-3,link.length);
+        var path = ctx+'/resource/'+vtype+'/'+link;
+        console.log(path);
+        var type = "video/"+vtype;
+        var videoObject = {
+            container: '#ckplayer', //容器的ID或className
+            variable: 'player',//播放函数名称
+            flashplayer: true,
+            poster: 'material/poster.jpg',//封面图片
+            volume: '1',//默认音量
+            video: [//视频地址列表形式
+                [path, type, '中文高清', 0]
+            ]
+        };
+        var player = new ckplayer(videoObject);
+    }
+    function prevAndNext(){
+        var prev=$(".fed-play-prev");
+        var next=$(".fed-play-next");
+        var filmId=[[${film.filmId}]];
+        var number=[[${episode.episodeNumber}]];
+        var max=[[${length}]];
+        if(number==1){
+            $(prev).addClass("fed-btns-disad");
+        }else{
+            $(prev).attr("href",ctx+"/film/play/id/"+filmId+"/episode/"+(parseInt(number)-1));
+        }
+        if(number==max){
+            $(next).addClass("fed-btns-disad");
+        }else{
+            $(next).attr("href",ctx+"/film/play/id/"+filmId+"/episode/"+(parseInt(number)+1));
+        }
+    }
+</script>
+<div class="fed-tabr-info fed-back-whits fed-min-width fed-line-top fed-hide-sm">
+    <ul class="fed-part-rows">
+        <li class="fed-text-center"><a href="/"><i class="fed-icon-font fed-icon-shouye"></i><span class="fed-font-xii">首页</span></a></li>
+        <li class="fed-text-center"><a href="http://www.shuyouge.cc"><i class="fed-icon-font fed-icon-zixun"></i><span class="fed-font-xii">小说</span></a></li>
+        <li class="fed-text-center"><a href="/index.php/gbook/index.html"><i class="fed-icon-font fed-icon-liuyan"></i><span class="fed-font-xii">求片</span></a></li>
+        <li class="fed-text-center"><a href="/index.php/topic/index.html"><i class="fed-icon-font fed-icon-zhuanti"></i><span class="fed-font-xii">专题</span></a></li>
+        <li class="fed-text-center"><a href="/index.php/user/login.html"><i class="fed-icon-font fed-icon-yonghu"></i><span class="fed-font-xii">我的</span></a></li>
+    </ul>
+</div>
+<div class="fed-main-info fed-min-width" style="transform: none;">
+    <div class="fed-part-case" style="transform: none;">
+        <mip-cambrian site-id="1604602645121874"></mip-cambrian>
+        <div class="fed-play-info fed-margin-top fed-box-shadow fed-back-whits fed-part-rows">
+            <div class="fed-col-xs12 fed-col-md9">
+                <div class="fed-play-player fed-part-rows fed-back-black fed-part-16by9">
+                    <div id="ckplayer">
+                    </div>
+                    <style>
+                        #ckplayer{
+                            position:absolute!important;
+                            width:100%;
+                            height:100%;
+                            top:0;
+                        }
+                    </style>
+                </div>
+                <div class="fed-play-title fed-part-rows">
+                    <ul class="fed-play-btn fed-padding fed-part-rows fed-col-xs12 fed-col-md6">
+                        <li class="fed-padding fed-col-xs9"><span class="fed-play-text fed-visible fed-font-xvi fed-part-eone" th:text="${film.filmName}+'第'+${episode.episodeNumber}+'集'"></span></li>
+                    </ul>
+                    <ul class="fed-play-btn fed-padding fed-part-rows fed-col-xs12 fed-col-md6">
+                        <li class="fed-padding fed-col-xs2">
+                            <a class="fed-btns-info fed-rims-info fed-visible fed-play-erro fed-event" href="javascript:;">报错</a>
+                        </li>
+                        <li class="fed-padding fed-col-xs2">
+                            <a class="fed-btns-info fed-rims-info fed-visible fed-play-reno fed-event" href="javascript:;">刷新</a>
+                        </li>
+                        <li class="fed-padding fed-col-xs2">
+                            <a class="fed-btns-info fed-rims-info fed-visible fed-play-share fed-event" href="javascript:;">分享</a>
+                        </li>
+                        <li class="fed-padding fed-col-xs3">
+                            <a class="fed-btns-info fed-rims-info fed-visible fed-play-prev" href="">上一集</a>
+                        </li>
+                        <li class="fed-padding fed-col-xs3">
+                            <a class="fed-btns-info fed-rims-info fed-visible fed-play-next" href="">下一集</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="fed-col-xs12 fed-col-md3">
+                <div class="fed-tabs-info fed-tabs-play fed-conv-double fed-part-roll">
+                    <div class="fed-tabs-boxs">
+                    </div>
+                    <div class="fed-tabs-boxs">
+                        <div class="fed-tabs-head">
+										<span class="fed-tabs-top fed-tabs-title fed-font-xvi fed-part-rows fed-hidden fed-show">
+						<span class="fed-col-xs4 fed-part-eone">ckplayer</span>
+						<span class="fed-col-xs8 fed-part-eone fed-text-right">在线播放<i class="fed-icon-font fed-icon-you"></i></span>
+					</span>
+                        </div>
+                        <div class="fed-tabs-foot">
+                            <ul class="fed-tabs-btm fed-padding fed-part-rows fed-hidden fed-show">
+                                <li class="fed-padding fed-col-xs3 fed-col-md6 fed-col-lg4" th:each="i:${#numbers.sequence(1,length)}">
+                                    <a class="fed-btns-info fed-rims-info fed-part-eone fed-btns-green"
+                                       th:href="@{/film/play/id/{filmId}/episode/{episodeNumber}(filmId=${film.filmId},episodeNumber=${i})}" th:text="'第'+${i}+'集'"
+                                        th:if="${episode.episodeNumber==i}"></a>
+                                    <a class="fed-btns-info fed-rims-info fed-part-eone"
+                                       th:href="@{/film/play/id/{filmId}/episode/{episodeNumber}(filmId=${film.filmId},episodeNumber=${i})}" th:text="'第'+${i}+'集'"
+                                       th:unless="${episode.episodeNumber==i}"></a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><div class="fed-part-rows" style="transform: none;">
+        <div class="fed-main-left fed-col-xs12 fed-col-md9" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+            <div class="theiaStickySidebar" style="padding-top: 1px; padding-bottom: 1px; position: static; transform: none;"><div class="fed-part-layout fed-back-whits fed-margin-right">
+                <dl class="fed-list-deta fed-margin fed-part-rows fed-part-over">
+                    <dt class="fed-deta-images fed-list-info fed-col-xs3">
+                        <a class="fed-list-pics fed-lazy fed-part-2by3"
+                           th:href="@{/film/play/id/{filmId}/episode/1(filmId=${film.filmId})}"
+                           th:style="'display: block; background-image: url(\''+@{/static/img/cover/{cover}(cover=${film.cover})}+'\');'">
+                            <span class="fed-list-play fed-hide-xs"></span>
+                            <span class="fed-list-score fed-font-xii fed-back-green" th:text="${film.doubanStar}"></span>
+                            <span class="fed-list-remarks fed-font-xii fed-text-white fed-text-center">完结</span>
+                        </a>
+                    </dt>
+                    <dd class="fed-deta-content fed-col-xs7 fed-col-sm8">
+                        <h3 class="fed-part-eone"><a th:href="@{/film/play/id/{filmId}/episode/1(filmId=${film.filmId})}" th:text="${film.filmName}"></a></h3>
+                        <ul class="fed-part-rows">
+                            <li class="fed-part-eone">
+                                <span class="fed-text-muted">主演：</span>
+                                <span th:text="${film.actor}" th:title="${film.actor}"></span>
+                            </li>
+                            <li class="fed-col-xs6 fed-part-eone">
+                                <span class="fed-text-muted">导演：</span>
+                                <span th:text="${film.director}"></span>
+                            </li>
+                            <li class="fed-col-xs6 fed-part-eone">
+                                <span class="fed-text-muted">编剧：</span>
+                                <span th:text="${film.screenwriter}"></span>&nbsp;&nbsp;
+                            </li>
+                            <li class="fed-col-xs6 fed-part-eone">
+                                <span class="fed-text-muted">分类：</span>
+                                <span th:text="${film.catlog.catlogName}"></span>&nbsp;&nbsp;
+                            </li>
+                            <li class="fed-col-xs6 fed-part-eone">
+                                <span class="fed-text-muted">地区：</span>
+                                <span th:text="${film.location}"></span>&nbsp;&nbsp;
+                            </li>
+                            <li class="fed-col-xs6 fed-part-eone"><span class="fed-text-muted">首播：</span>
+                                <span th:text="${film.releaseDate}"></span>&nbsp;&nbsp;
+                            </li>
+                            <li class="fed-col-xs6 fed-part-eone"><span class="fed-text-muted">单集片长：</span>
+                                <span th:text="${film.length}+分钟"></span>&nbsp;&nbsp;
+                            </li>
+                            <li class="fed-col-xs6 fed-part-eone"><span class="fed-text-muted">类型：</span>
+                                <span th:each="type:${film.types}">
+                                            <span th:text="${type.typeName}"></span>
+                                        </span>&nbsp;&nbsp;
+                            </li>
+                        </ul>
+                    </dd>
+                    <dd class="fed-deta-button fed-col-xs7 fed-col-sm8 fed-part-rows">
+                        <a class="fed-deta-play fed-rims-info fed-btns-info fed-btns-green fed-col-xs4" th:href="@{/film/id/{filmId}(filmId=${film.filmId})}">查看详情</a>
+                    </dd>
+                </dl>
+
+            </div>
+                <div class="fed-hide-sm fed-conv-info fed-part-layout fed-margin-right fed-back-whits">
+                <div style="padding-left: 17px; padding-right: 17px;">
+                    <div id="cambrian0" style="height: 65px;"><div class="_7Brqef"><div class="_1lAJB1"><div class="_1ke4J-"><div class="_25ZfXD ">查看</div></div><div class="_8zSUTn"><div class="_14jbvD"><img src="https://cambrian-images.cdn.bcebos.com/422be4a2019cce0203422260923baee3_1530267967898.jpeg" class="_1JSyq3"></div><div class="_2UGABC"><div class="_1X-0oQ"><div class="_27t1FH">微视影院</div><div class="_3Gqr4B">熊掌号</div></div><div class="_3AE6SS">每天为广大网友搜集最新高清电影免费资源</div></div></div></div></div></div>
+                </div>
+                </div>
+
+                <div class="fed-part-layout fed-margin-right fed-back-whits">
+                    <!--热播-->
+                    <div th:replace="footer::bottom"></div>
+            </div><div class="resize-sensor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: 0s; width: 888px; height: 1004px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div></div></div>
+        <!--righter-->
+        <div th:replace="righter::righter"></div>
+    </div>
+    </div>
+</div>
+<div th:replace="footer::footer"></div>
+</body>
+</html>

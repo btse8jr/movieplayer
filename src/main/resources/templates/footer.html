@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="bottom">
+    <div class="fed-list-head fed-part-rows fed-padding">
+        <h2 class="fed-font-xvi">最近热播</h2>
+        <ul class="fed-part-tips fed-padding">
+            <li><a class="fed-more" th:href="@{/}">更多</a></li>
+        </ul>
+    </div>
+    <ul class="fed-list-info fed-part-rows">
+
+    </ul>
+</div>
+<div class="fed-foot-info fed-part-layout fed-back-whits" th:fragment="footer">
+    <div class="fed-part-case">
+        <div class="fed-text-center fed-text-black fed-hide-xs fed-show-sm-block"></div>
+        <p class="fed-text-center fed-text-black"></p>
+        <p class="fed-text-center fed-text-black fed-hide-xs fed-show-sm-block">
+            免责声明：本网站提供的最新电视剧和电影资源均系收集于各大视频网站本网站只提供web页面服务并不提供影片资源存储也不参与录制上传</p>
+        <p class="fed-text-center fed-text-black fed-hide-xs fed-show-sm-block">
+            若本站收录的节目无意侵犯了贵司版权，请给邮箱地址xxx@xxx.com，我们会在3个工作日内删除侵权内容，谢谢。</p>
+
+        <div class="text" style=" text-align:center;">
+            <span id="cnzz_stat_icon_1272893291"></span><p></p>
+            <p class="fed-text-center fed-text-black fed-foot-maps fed-font-size">
+                <!--<a class="fed-font-xiv" href="" target="_blank"></a>
+                <span class="fed-font-xiv">&nbsp;-&nbsp;</span>-->
+            </p>
+            <p class="fed-text-center fed-text-black">Copyright 2018 www.xxxx.xxx Inc.<span class="fed-hide-xs">&nbsp;All Rights Reserved.</span>
+            </p>
+        </div>
+    </div>
+    <div class="fed-goto-info">
+        <a class="fed-goto-share fed-visible fed-text-center fed-back-whits fed-icon-font fed-icon-fenxiang"
+           href="javascript:;"></a>
+        <a class="fed-goto-toper fed-visible fed-text-center fed-back-whits fed-icon-font fed-icon-top"
+           href="javascript:;"></a>
+    </div>
+    <script>
+        $(function () {
+            var context=/*[[@{/}]]*/'';
+            var ctx=context=="\/"?"":context;
+            $('.fed-goto-toper').click(function(){
+                    $('html ,body').animate({scrollTop: 0}, 300);
+                    return false;
+            });
+            $.ajax({
+                "url":ctx+"/film/limit",
+                "method":"get",
+                "data":{"length":"5"},
+                success:function (data) {
+                    if(data.code==0){
+                        $.each(data.data,function (index,value) {
+                            var item="<li class='fed-list-item fed-padding fed-width-xx fed-col-xs4 fed-col-sm3'>" +
+                                "                                <a class='fed-list-pics fed-lazy fed-part-2by3'" +
+                                "                                   href='"+ctx+"/film/id/"+value.filmId+"'" +
+                                "                                   data-original='"+ctx+"/static/img/cover/"+value.cover+"'" +
+                                "                                   style=\"display: block; background-image: url(\'"+ctx+"/static/img/cover/"+value.cover+"\');\">" +
+                                "                                    <span class='fed-list-play fed-hide-xs'></span>" +
+                                "                                    <span class='fed-list-score fed-font-xii fed-back-green'>"+value.doubanStar+"</span>" +
+                                "                                    <span class='fed-list-remarks fed-font-xii fed-text-white fed-text-center'>"+value.status+"</span>" +
+                                "                                </a>" +
+                                "                                <a class='fed-list-title fed-font-xiv fed-text-center fed-text-sm-left fed-visible fed-part-eone'" +
+                                "                                   href='"+ctx+"/film/id/"+value.filmId+"'>"+value.filmName+"</a>" +
+                                "                                <span class='fed-list-desc fed-font-xii fed-visible fed-part-eone fed-text-muted fed-hide-xs fed-show-sm-block'>" +
+                                value.actor +
+                                "                                </span>" +
+                                "                            </li>";
+                            $(".fed-part-layout.fed-margin-right.fed-back-whits").find(".fed-list-info.fed-part-rows").append(item);
+                        })
+                    }
+                }
+            });
+        });
+    </script>
+</div>
+</html>
