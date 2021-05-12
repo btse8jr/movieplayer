@@ -9,64 +9,12 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <link th:href="@{/static/css/style.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{/static/plugins/jquery/jquery-3.3.1.js}"></script>
-    <script type="text/javascript" th:src="@{/static/plugins/ckplayer/ckplayer/ckplayer.js}" charset="utf-8"></script>
+    <script th:src="@{/static/plugin/jquery/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/static/plugin/ckplayer/ckplayer/ckplayer.js}" charset="utf-8"></script>
     <title th:text="${film.filmName}+'第'+${episode.episodeNumber}+'集'"></title>
 </head>
 <body class="fed-min-width" style="transform: none;">
 <div th:replace="nav::nav"></div>
-<script th:inline="javascript">
-    var context=/*[[@{/}]]*/'';
-    var ctx=context=="\/"?"":context;
-    $(function () {
-        play();
-        var items=$(".fed-navs-title");
-        $.each(items,function (index,item) {
-            if($(item).text()==[[${film.catlog.catlogName}]]){
-                $(item).addClass("fed-text-green");
-            }
-        });
-        prevAndNext();
-        $(".fed-play-reno").click(function () {
-            location.reload();
-        });
-    });
-    function play(){
-        var link=[[${episode.link}]].replace(/\//g,"_");
-        var vtype=link.substring(link.length-3,link.length);
-        var path = ctx+'/resource/'+vtype+'/'+link;
-        console.log(path);
-        var type = "video/"+vtype;
-        var videoObject = {
-            container: '#ckplayer', //容器的ID或className
-            variable: 'player',//播放函数名称
-            flashplayer: true,
-            poster: 'material/poster.jpg',//封面图片
-            volume: '1',//默认音量
-            video: [//视频地址列表形式
-                [path, type, '中文高清', 0]
-            ]
-        };
-        var player = new ckplayer(videoObject);
-    }
-    function prevAndNext(){
-        var prev=$(".fed-play-prev");
-        var next=$(".fed-play-next");
-        var filmId=[[${film.filmId}]];
-        var number=[[${episode.episodeNumber}]];
-        var max=[[${length}]];
-        if(number==1){
-            $(prev).addClass("fed-btns-disad");
-        }else{
-            $(prev).attr("href",ctx+"/film/play/id/"+filmId+"/episode/"+(parseInt(number)-1));
-        }
-        if(number==max){
-            $(next).addClass("fed-btns-disad");
-        }else{
-            $(next).attr("href",ctx+"/film/play/id/"+filmId+"/episode/"+(parseInt(number)+1));
-        }
-    }
-</script>
 <div class="fed-tabr-info fed-back-whits fed-min-width fed-line-top fed-hide-sm">
     <ul class="fed-part-rows">
         <li class="fed-text-center"><a href="/"><i class="fed-icon-font fed-icon-shouye"></i><span class="fed-font-xii">首页</span></a></li>
@@ -214,5 +162,57 @@
     </div>
 </div>
 <div th:replace="footer::footer"></div>
+<script th:inline="javascript">
+    var context=/*[[@{/}]]*/'';
+    var ctx=context=="\/"?"":context;
+    $(function () {
+        play();
+        var items=$(".fed-navs-title");
+        $.each(items,function (index,item) {
+            if($(item).text()==[[${film.catlog.catlogName}]]){
+                $(item).addClass("fed-text-green");
+            }
+        });
+        prevAndNext();
+        $(".fed-play-reno").click(function () {
+            location.reload();
+        });
+    });
+    function play(){
+        var link=[[${episode.link}]].replace(/\//g,"_");
+        var vtype=link.substring(link.length-3,link.length);
+        var path = ctx+'/resource/'+vtype+'/'+link;
+        console.log(path);
+        var type = "video/"+vtype;
+        var videoObject = {
+            container: '#ckplayer', //容器的ID或className
+            variable: 'player',//播放函数名称
+            flashplayer: true,
+            poster: 'material/poster.jpg',//封面图片
+            volume: '1',//默认音量
+            video: [//视频地址列表形式
+                [path, type, '中文高清', 0]
+            ]
+        };
+        var player = new ckplayer(videoObject);
+    }
+    function prevAndNext(){
+        var prev=$(".fed-play-prev");
+        var next=$(".fed-play-next");
+        var filmId=[[${film.filmId}]];
+        var number=[[${episode.episodeNumber}]];
+        var max=[[${length}]];
+        if(number==1){
+            $(prev).addClass("fed-btns-disad");
+        }else{
+            $(prev).attr("href",ctx+"/film/play/id/"+filmId+"/episode/"+(parseInt(number)-1));
+        }
+        if(number==max){
+            $(next).addClass("fed-btns-disad");
+        }else{
+            $(next).attr("href",ctx+"/film/play/id/"+filmId+"/episode/"+(parseInt(number)+1));
+        }
+    }
+</script>
 </body>
 </html>

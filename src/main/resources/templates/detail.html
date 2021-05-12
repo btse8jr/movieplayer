@@ -12,17 +12,7 @@
     <link href="/favicon.png" rel="shortcut icon" type="image/ico">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/index.php/rss/index.xml">
     <link th:href="@{/static/css/style.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{/static/plugins/jquery/jquery-3.3.1.js}"></script>
-    <script th:inline="javascript">
-        $(function () {
-            var items=$(".fed-navs-title");
-            $.each(items,function (index,item) {
-                if($(item).text()==[[${film.catlog.catlogName}]]){
-                    $(item).addClass("fed-text-green");
-                }
-            });
-        });
-    </script>
+    <script th:src="@{/static/plugin/jquery/jquery-3.3.1.js}"></script>
     <title th:text="${film.filmName}"></title>
 </head>
 <body class="fed-min-width" style="transform: none;">
@@ -183,5 +173,15 @@
 </div>
 <!--footer-->
 <div th:replace="footer::footer"></div>
+<script th:inline="javascript">
+    $(function () {
+        var items=$(".fed-navs-title");
+        $.each(items,function (index,item) {
+            if($(item).text()==[[${film.catlog.catlogName}]]){
+                $(item).addClass("fed-text-green");
+            }
+        });
+    });
+</script>
 </body>
 </html>
