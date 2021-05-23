@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>登录</title>
+    <script th:src="@{/static/plugin/jquery/jquery-3.3.1.js}"></script>
+</head>
+<body>
+<form id="loginForm">
+    <input name="username" id="username">
+    <input name="password" id="password">
+    <button type="button" id="login">登录</button>
+</form>
+<script th:inline="javascript">
+$(function(){
+    var from=getParam("from");
+    console.log(from);
+    from=from==null?"/":from;
+    $("#login").click(function () {
+        $.ajax({
+            "url":"/user/login",
+            "type":"get",
+            "data":$("#loginForm").serialize(),
+            "success":function (data) {
+                if(data.code==0){
+                    alert("登录成功");
+                    location.href=from;
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+});
+var getParam = function(name) {
+    var search = document.location.search;
+    var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
+    var matcher = pattern.exec(search);
+    var items = null;
+    if (null != matcher) {
+        try {
+            items = decodeURIComponent(decodeURIComponent(matcher[1]));
+        } catch (e) {
+            try {
+                items = decodeURIComponent(matcher[1]);
+            } catch (e) {
+                items = matcher[1];
+            }
+        }
+    }
+    return items;
+};
+</script>
+</body>
+</html>

@@ -22,14 +22,14 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addViewControllers( ViewControllerRegistry registry ) {
-        registry.addViewController( "/" ).setViewName( "forward:/index" );
+        registry.addViewController( "/" ).setViewName( "forward:/film/index" );
         registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
         super.addViewControllers( registry );
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localInterceptor()).addPathPatterns("/**").excludePathPatterns("/static/**","/login","/register","/user/**", "/error/**");;
+        registry.addInterceptor(localInterceptor()).addPathPatterns("/**").excludePathPatterns("/static/**","/login","/register","/user/**", "/catlog/all", "/resource/auth", "/error/**");;
     }
 
     @Override

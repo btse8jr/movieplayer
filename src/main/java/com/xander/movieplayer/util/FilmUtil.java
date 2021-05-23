@@ -1,6 +1,6 @@
 package com.xander.movieplayer.util;
 
-import com.xander.movieplayer.dto.FilmDTO;
+import com.xander.movieplayer.vo.FilmVO;
 import com.xander.movieplayer.entity.Film;
 
 import java.util.ArrayList;
@@ -10,30 +10,30 @@ import java.util.List;
  * Created by Xander on 2018-08-29.
  */
 public class FilmUtil {
-    public static FilmDTO convertToFilmDTO(Film film){
-        FilmDTO filmDTO=new FilmDTO();
-        filmDTO.setFilmId(film.getFilmId());
-        filmDTO.setFilmName(film.getFilmName());
-        filmDTO.setActor(film.getActor());
-        filmDTO.setCover(film.getCover());
-        filmDTO.setDoubanStar(film.getDoubanStar());
-        filmDTO.setStatus(film.getStatus());
-        return filmDTO;
+    public static FilmVO convertToFilmVO(Film film){
+        FilmVO filmVO=new FilmVO();
+        filmVO.setFilmId(film.getFilmId());
+        filmVO.setFilmName(film.getFilmName());
+        filmVO.setActor(film.getActor());
+        filmVO.setCover(film.getCover());
+        filmVO.setDoubanStar(film.getDoubanStar());
+        filmVO.setStatus(film.getStatus());
+        return filmVO;
     }
 
-    public static List<FilmDTO> convertToFilmDTOS(List<Film> films){
-        List<FilmDTO> filmDTOS=new ArrayList<>();
-        FilmDTO filmDTO;
+    public static List<FilmVO> convertToFilmVOS(List<Film> films){
+        List<FilmVO> filmVOS=new ArrayList<>();
+        FilmVO filmVO;
         for(Film film:films){
-            filmDTO=new FilmDTO();
-            filmDTO.setFilmId(film.getFilmId());
-            filmDTO.setFilmName(film.getFilmName());
-            filmDTO.setActor(film.getActor());
-            filmDTO.setCover(film.getCover());
-            filmDTO.setDoubanStar(film.getDoubanStar());
-            filmDTO.setStatus(film.getStatus());
-            filmDTOS.add(filmDTO);
+            filmVO=new FilmVO();
+            filmVO.setFilmId(film.getFilmId());
+            filmVO.setFilmName(film.getFilmName());
+            filmVO.setActor(film.getActor());
+            filmVO.setCover(film.getCover());
+            filmVO.setDoubanStar(film.getDoubanStar());
+            filmVO.setStatus(film.getStatus());
+            filmVOS.add(filmVO);
         }
-        return filmDTOS;
+        return filmVOS;
     }
 }

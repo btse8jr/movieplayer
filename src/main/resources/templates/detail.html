@@ -84,7 +84,7 @@
                                     </li>
                                     <li class="fed-col-xs6 fed-part-eone"><span class="fed-text-muted">类型：</span>
                                         <span th:each="type:${film.types}">
-                                            <span th:text="${type.typeName}"></span>
+                                            <a th:href="@{/film/type/{typeId}(typeId=${type.typeId})}"><span th:text="${type.typeName}"></span></a>
                                         </span>&nbsp;&nbsp;
                                     </li>
                                 </ul>

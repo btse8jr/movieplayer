@@ -2,6 +2,7 @@ package com.xander.movieplayer.controller;
 
 import com.xander.movieplayer.aop.ExceptionHandler;
 import com.xander.movieplayer.bean.ResultBean;
+import com.xander.movieplayer.dto.UserDTO;
 import com.xander.movieplayer.entity.User;
 import com.xander.movieplayer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("login")
-    @GetMapping
+    @GetMapping("login")
     @ResponseBody
     @ExceptionHandler
     public ResultBean login(String username, String password, HttpSession session){
@@ -29,20 +29,26 @@ public class UserController {
         return new ResultBean();
     }
 
-    @RequestMapping("logout")
-    @GetMapping
+    @GetMapping("logout")
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/login";
     }
 
-    @RequestMapping("register")
-    @PostMapping
+    @PostMapping("register")
     @ResponseBody
     @ExceptionHandler
-    public ResultBean register(User user){
-        user.setPermission(0);
-        userService.register(user);
+    public ResultBean register(UserDTO userDTO,HttpSession session){
+        userDTO.setVerCode((String) session.getAttribute("verCode"));
+        userService.register(userDTO);
+        return new ResultBean();
+    }
+
+    @GetMapping("check")
+    @ResponseBody
+    @ExceptionHandler
+    public ResultBean check(String username){
+        userService.exist(username);
         return new ResultBean();
     }
 }

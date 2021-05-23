@@ -1,9 +1,9 @@
-package com.xander.movieplayer.dto;
+package com.xander.movieplayer.vo;
 
 /**
  * Created by Xander on 2018-08-29.
  */
-public class FilmDTO {
+public class FilmVO {
     private Long filmId;
     private String filmName;
     private String cover;

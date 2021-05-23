@@ -12,44 +12,44 @@
     <button type="button" id="login">登录</button>
 </form>
 <script th:inline="javascript">
-$(function(){
-    var from=getParam("from");
-    console.log(from);
-    from=from==null?"/":from;
-    $("#login").click(function () {
-        $.ajax({
-            "url":"/user/login",
-            "type":"get",
-            "data":$("#loginForm").serialize(),
-            "success":function (data) {
-                if(data.code==0){
-                    alert("登录成功");
-                    location.href=from;
-                }else{
-                    alert(data.msg);
+    $(function(){
+        var from=getParam("from");
+        console.log(from);
+        from=from==null?"/":from;
+        $("#login").click(function () {
+            $.ajax({
+                "url":"/user/login",
+                "type":"get",
+                "data":$("#loginForm").serialize(),
+                "success":function (data) {
+                    if(data.code==0){
+                        alert("登录成功");
+                        location.href=from;
+                    }else{
+                        alert(data.msg);
+                    }
                 }
-            }
+            });
         });
     });
-});
-var getParam = function(name) {
-    var search = document.location.search;
-    var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
-    var matcher = pattern.exec(search);
-    var items = null;
-    if (null != matcher) {
-        try {
-            items = decodeURIComponent(decodeURIComponent(matcher[1]));
-        } catch (e) {
+    var getParam = function(name) {
+        var search = document.location.search;
+        var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
+        var matcher = pattern.exec(search);
+        var items = null;
+        if (null != matcher) {
             try {
-                items = decodeURIComponent(matcher[1]);
+                items = decodeURIComponent(decodeURIComponent(matcher[1]));
             } catch (e) {
-                items = matcher[1];
+                try {
+                    items = decodeURIComponent(matcher[1]);
+                } catch (e) {
+                    items = matcher[1];
+                }
             }
         }
-    }
-    return items;
-};
+        return items;
+    };
 </script>
 </body>
 </html>

@@ -37,6 +37,12 @@ public class ResourceController {
         outputImage(w, h, response.getOutputStream(), code);
     }
 
+    @GetMapping("test/{path:.+}")
+    @ResponseBody
+    public String test(@PathVariable String path){
+        return path;
+    }
+
     @GetMapping("mp4/{path:.+}")
     @ResponseBody
     public void mp4(@PathVariable String path, HttpServletResponse response) throws Exception {

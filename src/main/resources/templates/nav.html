@@ -10,7 +10,8 @@
         <div class="fed-navs-right">
             <a class="fed-navs-button fed-text-black fed-event fed-hide-sm fed-icon-font fed-icon-sousuo" href="javascript:;"></a>
             <a class="fed-navs-record fed-text-black fed-event fed-hide-xs fed-show-sm-block" href="javascript:;">看过<span class="fed-part-move fed-edge-info fed-edge-bottom"></span></a>
-            <a class="fed-navs-user fed-text-black fed-event fed-hide-xs fed-show-sm-block" href="javascript:;">我的<span class="fed-part-move fed-edge-info fed-edge-bottom"></span></a>
+            <a class="fed-text-black fed-hide-xs fed-show-sm-block" th:href="@{/login}" th:if="${session.user}==null">登录</a>
+            <a class="fed-navs-user fed-text-black fed-event fed-hide-xs fed-show-sm-block" href="javascript:;" th:unless="${session.user}==null">我的<span class="fed-part-move fed-edge-info fed-edge-bottom"></span></a>
             <a class="fed-navs-record fed-text-black fed-event fed-hide-sm fed-icon-font fed-icon-lishi" href="javascript:;"></a>
             <a class="fed-text-black fed-event" href="javascript:;" target="_blank">APP下载</a>
         </div>
@@ -18,15 +19,30 @@
             <div class="fed-pops-channel fed-back-whits fed-part-rows fed-line-top fed-hidden">选择频道</div>
             <a class="fed-pops-btn fed-back-whits fed-text-black fed-text-center fed-event fed-hide-sm fed-icon-font fed-icon-fenlei" href="javascript:;"></a>
         </div>
-        <div class="fed-pops-record fed-box-shadow fed-hidden fed-conceal fed-anim fed-anim-upbit" style="display: none;">
-            <div class="fed-pops-title fed-back-whits fed-line-bottom fed-part-rows"><span class="fed-col-xs9">观看记录</span><a class="fed-clear fed-event fed-text-right fed-col-xs3" href="javascript:;">清空</a></div><ul class="fed-pops-list fed-back-whits"><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/13130/sid/1/nid/1.html"><span class="fed-part-eone fed-col-xs9">爱情公寓第三部<span class="fed-text-muted">[第01集]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">OK云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/34574/sid/2/nid/1.html"><span class="fed-part-eone fed-col-xs9">新乌龙院之笑闹江湖<span class="fed-text-muted">[HDTC清晰版]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">最大云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/34574/sid/1/nid/1.html"><span class="fed-part-eone fed-col-xs9">新乌龙院之笑闹江湖<span class="fed-text-muted">[TS抢先]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">OK云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/34574/sid/3/nid/1.html"><span class="fed-part-eone fed-col-xs9">新乌龙院之笑闹江湖<span class="fed-text-muted">[HDTS1280清晰无水印]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">搜播云</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/6019/sid/1/nid/1.html"><span class="fed-part-eone fed-col-xs9">巨齿鲨<span class="fed-text-muted">[HDTC高清中字版]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">最大云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/13126/sid/1/nid/1.html"><span class="fed-part-eone fed-col-xs9">爱情公寓第一部<span class="fed-text-muted">[第01集]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">OK云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/13136/sid/1/nid/1.html"><span class="fed-part-eone fed-col-xs9">爱情公寓番外篇<span class="fed-text-muted">[第01集]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">OK云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/13136/sid/1/nid/2.html"><span class="fed-part-eone fed-col-xs9">爱情公寓番外篇<span class="fed-text-muted">[第02集]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">OK云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/34628/sid/1/nid/1.html"><span class="fed-part-eone fed-col-xs9">快把我哥带走2018<span class="fed-text-muted">[TS枪版]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">OK云播</span></a></li><li class="fed-part-rows fed-line-bottom"><a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/33720/sid/1/nid/1.html"><span class="fed-part-eone fed-col-xs9">小偷家族<span class="fed-text-muted">[HDTC高清国语版]</span></span><span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">最大云播</span></a></li></ul></div>
+        <!--<div class="fed-pops-record fed-box-shadow fed-hidden fed-conceal fed-anim fed-anim-upbit" style="display: none;">
+            <div class="fed-pops-title fed-back-whits fed-line-bottom fed-part-rows"><span class="fed-col-xs9">观看记录</span>
+                <a class="fed-clear fed-event fed-text-right fed-col-xs3" href="javascript:;">清空</a>
+            </div>
+            <ul class="fed-pops-list fed-back-whits">
+                <li class="fed-part-rows fed-line-bottom">
+                    <a class="fed-part-rows" href="https://www.weishi432.com/index.php/vod/play/id/13130/sid/1/nid/1.html">
+                        <span class="fed-part-eone fed-col-xs9">
+                            xxxx
+                            <span class="fed-text-muted">[第xx集]</span>
+                        </span>
+                        <span class="fed-part-eone fed-text-muted fed-text-right fed-col-xs3">xx平台</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="fed-pops-code fed-back-whits fed-box-shadow fed-hidden fed-conceal fed-anim fed-anim-upbit" style="display: none;">
             <div class="fed-pops-cont">
                 <p>下载地址：<a href="https://www.lanzous.com/b322033/" target="_self">https://www.lanzous.com/b322033/</a></p>			</div>
-        </div>
+        </div>-->
         <div class="fed-pops-user fed-box-shadow fed-back-whits fed-hidden fed-conceal fed-anim fed-anim-upbit" style="margin-top:5rem">
             <ul class="fed-pops-list fed-font-size fed-back-whits">
-                <li><a th:href="@{/user/home}" th:text="${session.user.username}"></a></li>
+                <li><a th:href="@{/user/home}" th:text="${session.user}==null?'请登录':${session.user.username}"></a></li>
+                <li><a th:href="@{/user/admin}" th:if="${session.user!=null&&session.user.permission==1}">管理</a></li>
                 <li><a th:href="@{/user/edit}">修改资料</a></li>
                 <!--<li><a th:href="@{/user/favs}">我的收藏</a></li>
                 <li><a th:href="@{/user/history}">播放记录</a></li>-->
