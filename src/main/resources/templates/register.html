@@ -57,6 +57,7 @@
     var context=/*[[@{/}]]*/'';
     var ctx=context=="\/"?"":context;
     $(function () {
+        //验证用户名
         $("input[name=username]").blur(function () {
             var username=$(this).val();
             $.ajax({
@@ -73,6 +74,8 @@
                 }
             });
         });
+
+        //登录
         $(".fed-subm-regis").click(function () {
             var flag=true;
             var inputs=$(".fed-user-form input");

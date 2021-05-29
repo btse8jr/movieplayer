@@ -54,6 +54,7 @@
         var context=/*[[@{/}]]*/'';
         var ctx=context=="\/"?"":context;
         $(function () {
+            //获取分类
             $.ajax({
                 "url":ctx+"/catlog/all",
                 "type":"get",
@@ -68,6 +69,8 @@
                     }
                 }
             });
+
+            //弹出用户菜单
             $(".fed-navs-user").click(function () {
                 var triangle=$(this).children(".fed-part-move");
                 if($(triangle).is(".fed-edge-bottom")){
