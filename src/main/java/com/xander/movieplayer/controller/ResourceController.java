@@ -37,19 +37,13 @@ public class ResourceController {
         outputImage(w, h, response.getOutputStream(), code);
     }
 
-    @GetMapping("test/{path:.+}")
-    @ResponseBody
-    public String test(@PathVariable String path){
-        return path;
-    }
-
     @GetMapping("mp4/{path:.+}")
     @ResponseBody
     public void mp4(@PathVariable String path, HttpServletResponse response) throws Exception {
         Properties p = new Properties();
         p.load(ResourceController.class.getResourceAsStream("/videopath.properties"));
         String basePath = p.get("path").toString();
-        String realPath = basePath + path.replaceAll("_", "/");
+        String realPath = basePath + path.replaceAll(":", "/");
         response.setContentType("video/mp4");
         response.setHeader("Accept-Ranges", "bytes");
         response.setHeader("Etag", "W/\"9767057-1323779115364\"");
@@ -78,7 +72,7 @@ public class ResourceController {
         Properties p = new Properties();
         p.load(ResourceController.class.getResourceAsStream("/videopath.properties"));
         String basePath = p.get("path").toString();
-        String realPath = basePath + path.replaceAll("_", "/");
+        String realPath = basePath + path.replaceAll(":", "/");
         response.setContentType("video/flv");
         response.setHeader("Accept-Ranges", "bytes");
         response.setHeader("Etag", "W/\"9767057-1323779115364\"");

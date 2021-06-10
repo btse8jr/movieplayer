@@ -19,7 +19,7 @@ public interface FilmRepository extends CrudRepository<Film, Long> {
     @Query(value = "select * from film group by film_id desc limit ?1", nativeQuery = true)
     List<Film> findByLimit(int length);
 
-    @Query(value = "select * from film where catlog_id=?1", nativeQuery = true)
+    @Query(value = "select * from film where catlog_id=?1 group by film_id desc", nativeQuery = true)
     List<Film> findByCatlogId(Long catLogId);
 
     @Transactional

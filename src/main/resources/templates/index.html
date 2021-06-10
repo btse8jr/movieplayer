@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=60">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="/favicon.png" rel="apple-touch-icon-precomposed">
+    <link href="/favicon.png" rel="shortcut icon" type="image/ico">
+    <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/index.php/rss/index.xml">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/static/plugin/jquery/jquery-3.3.1.js}"></script>
+    <title>无名影院</title>
 </head>
 <body>
+<!--nav-->
+<div th:replace="nav::nav"></div>
+<div class="fed-main-info fed-min-width">
+    <div class="fed-part-case">
+        <div class="fed-part-layout fed-back-whits">
+            <div class="fed-list-head fed-part-rows fed-padding">
+                <h2 class="fed-font-xvi" th:text="${name}"></h2>
+            </div>
+            <ul class="fed-list-info fed-part-rows">
+                <li class="fed-list-item fed-padding fed-col-xs4 fed-col-sm3 fed-col-md2" th:each="film:${filmVOS}">
+                    <a class="fed-list-pics fed-lazy fed-part-2by3" th:href="@{/film/id/{filmId}(filmId=${film.filmId})}" th:style="'display: block; background-image: url(\''+@{/static/img/cover/{cover}(cover=${film.cover})}+'\');'">
+                        <span class="fed-list-play fed-hide-xs"></span>
+                        <span class="fed-list-score fed-font-xii fed-back-green" th:text="${film.doubanStar}"></span>
+                        <span class="fed-list-remarks fed-font-xii fed-text-white fed-text-center" th:text="${film.status}"></span>
+                    </a>
+                    <a class="fed-list-title fed-font-xiv fed-text-center fed-text-sm-left fed-visible fed-part-eone" th:href="@{/film/id/{filmId}(filmId=${film.filmId})}" th:text="${film.filmName}"></a>
+                    <span class="fed-list-desc fed-font-xii fed-visible fed-part-eone fed-text-muted fed-hide-xs fed-show-sm-block" th:text="${film.actor}" th:title="${film.actor}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--footer-->
+<div th:replace="footer::footer"></div>
 <script th:inline="javascript">
     var context=/*[[@{/}]]*/'';
     var ctx=context=="\/"?"":context;
-    console.log(context);
-    console.log(ctx);
+    $(function () {
+        var name=$(".fed-list-head .fed-font-xvi").text();
+        var items=$(".fed-navs-title");
+        $.each(items,function (index,item) {
+            if(name=="全部"){
+                $(items).eq(0).addClass("fed-text-green");
+            }else if($(item).text()==name){
+                $(item).addClass("fed-text-green");
+            }
+        });
+    });
 </script>
 </body>
 </html>

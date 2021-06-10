@@ -2,10 +2,14 @@ package com.xander.movieplayer.controller;
 
 import com.xander.movieplayer.aop.ExceptionHandler;
 import com.xander.movieplayer.bean.ResultBean;
+import com.xander.movieplayer.entity.Catlog;
 import com.xander.movieplayer.entity.Episode;
 import com.xander.movieplayer.entity.Film;
+import com.xander.movieplayer.entity.Type;
+import com.xander.movieplayer.service.CatLogService;
 import com.xander.movieplayer.service.EpisodeService;
 import com.xander.movieplayer.service.FilmService;
+import com.xander.movieplayer.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +34,13 @@ public class FilmController {
     @Autowired
     private EpisodeService episodeService;
 
+    @Autowired
+    private TypeService typeService;
+
+    @Autowired
+    private CatLogService catLogService;
+
+
     @GetMapping("all")
     @ResponseBody
     @ExceptionHandler
@@ -41,6 +52,7 @@ public class FilmController {
     @GetMapping("index")
     public String index(Model model) {
         List<Film> films = filmService.findAllOrderByFilmIdDesc();
+        model.addAttribute("name","全部");
         model.addAttribute("filmVOS", convertToFilmVOS(films));
         return "index";
     }
@@ -56,6 +68,8 @@ public class FilmController {
     @GetMapping("type/{typeId}")
     public String findByTypeId(@PathVariable Long typeId, Model model) {
         List<Film> films = filmService.findAByTypeId(typeId);
+        Type type=typeService.findByTypeId(typeId);
+        model.addAttribute("name",type.getTypeName());
         model.addAttribute("filmVOS", convertToFilmVOS(films));
         return "index";
     }
@@ -63,7 +77,9 @@ public class FilmController {
     @GetMapping("catlog/{catlogId}")
     public String findByCatlogId(@PathVariable Long catlogId, Model model) {
         List<Film> films = filmService.findAByCatlogId(catlogId);
-        model.addAttribute("films", films);
+        Catlog catlog=catLogService.findByCatlogId(catlogId);
+        model.addAttribute("name",catlog.getCatlogName());
+        model.addAttribute("filmVOS", convertToFilmVOS(films));
         return "index";
     }
 

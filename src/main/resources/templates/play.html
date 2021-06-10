@@ -179,10 +179,9 @@
         });
     });
     function play(){
-        var link=[[${episode.link}]].replace(/\//g,"_");
+        var link=[[${episode.link}]].replace(/\//g,":");
         var vtype=link.substring(link.length-3,link.length);
         var path = ctx+'/resource/'+vtype+'/'+link;
-        console.log(path);
         var type = "video/"+vtype;
         var videoObject = {
             container: '#ckplayer', //容器的ID或className

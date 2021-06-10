@@ -12,7 +12,7 @@ import java.util.List;
 public interface FilmTypeRepository extends CrudRepository<FilmType, Long> {
     FilmType findByFilmTypeId(Long filmTypeId);
 
-    @Query(value = "select * from film_type where type_id=?1", nativeQuery = true)
+    @Query(value = "select * from film_type where type_id=?1 group by film_id desc", nativeQuery = true)
     List<FilmType> getByTypeId(Long TypeId);
 
 }
