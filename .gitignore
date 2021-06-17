@@ -27,3 +27,5 @@
 /.mvn/
 /src/main/resources/static/html/
 /src/main/resources/static/static/img/cover/
+/mvnw.cmd
+/mvnw
